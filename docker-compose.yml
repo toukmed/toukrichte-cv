@@ -6,7 +6,7 @@
 # No second Traefik needed.
 #
 # LOCAL DEV:    docker compose up -d
-#               → http://localhost:4001
+#               → http://localhost:4002
 #
 # PRODUCTION:   docker compose up -d
 #               → https://cv.toukrichtemed.com (via creatifpro Traefik)
@@ -20,7 +20,7 @@ services:
     container_name: toukrichtemed_cv
     restart: unless-stopped
     ports:
-      - "4001:80"
+      - "4002:80"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=creatif-network"
