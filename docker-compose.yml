@@ -29,6 +29,7 @@ services:
       - "traefik.http.routers.toukrichtemed-cv-secure.entrypoints=websecure"
       - "traefik.http.routers.toukrichtemed-cv-secure.tls=true"
       - "traefik.http.routers.toukrichtemed-cv-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.toukrichtemed-cv-secure.service=toukrichtemed-cv"
       - "traefik.http.services.toukrichtemed-cv.loadbalancer.server.port=80"
     networks:
       - creatif-network
