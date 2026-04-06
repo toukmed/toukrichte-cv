@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
-LABEL org.opencontainers.image.title="ToukrichteMed Landing Page" \
-      org.opencontainers.image.description="Landing page for Mohamed Toukrichte" \
+LABEL org.opencontainers.image.title="ToukrichteMed CV" \
+      org.opencontainers.image.description="CV for Mohamed Toukrichte" \
       org.opencontainers.image.version="1.0.0"
 
 COPY src/ /usr/share/nginx/html/
