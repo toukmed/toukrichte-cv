@@ -1,0 +1,43 @@
+# ═══════════════════════════════════════════════════════
+# ToukrichteMed Landing Page
+# ═══════════════════════════════════════════════════════
+#
+# Uses the shared Traefik from creatifpro (creatif-network).
+# No second Traefik needed.
+#
+# LOCAL DEV:    docker compose up -d
+#               → http://localhost:4001
+#
+# PRODUCTION:   docker compose up -d
+#               → https://cv.toukrichtemed.com (via creatifpro Traefik)
+# ═══════════════════════════════════════════════════════
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: toukrichtemed_web
+    restart: unless-stopped
+    ports:
+      - "4001:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=creatif-network"
+      # HTTPS
+      - "traefik.http.routers.toukrichtemed-secure.rule=Host(`cv.toukrichtemed.com`)"
+      - "traefik.http.routers.toukrichtemed-secure.entrypoints=websecure"
+      - "traefik.http.routers.toukrichtemed-secure.tls=true"
+      - "traefik.http.routers.toukrichtemed-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.services.toukrichtemed.loadbalancer.server.port=80"
+    networks:
+      - creatif-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 64M
+
+networks:
+  creatif-network:
+    external: true
